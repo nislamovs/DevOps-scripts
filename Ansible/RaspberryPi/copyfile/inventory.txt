@@ -1,0 +1,1 @@
+web1 ansible_host=raspi ansible_connection=ssh ansible_user=pi ansible_ssh_pass=raspberry
