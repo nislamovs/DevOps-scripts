@@ -1,0 +1,51 @@
+{
+  "version" : "1.0.1",
+  "name" : "maven-test-pkg",
+  "number" : "1604199688066",
+  "type" : "MAVEN",
+  "buildAgent" : {
+    "name" : "Maven",
+    "version" : "3.6.0"
+  },
+  "agent" : {
+    "name" : "Maven",
+    "version" : "3.6.0"
+  },
+  "started" : "2020-11-01T05:01:28.880+0200",
+  "durationMillis" : 1469,
+  "licenseControl" : {
+    "runChecks" : false,
+    "includePublishedArtifacts" : false,
+    "autoDiscover" : false,
+    "licenseViolationsRecipientsList" : "",
+    "scopesList" : ""
+  },
+  "buildRetention" : {
+    "count" : -1,
+    "deleteBuildArtifacts" : true,
+    "buildNumbersNotToBeDiscarded" : [ ]
+  },
+  "modules" : [ {
+    "properties" : { },
+    "id" : "com.maven.testpkg:maven-test-pkg:1.0.0-SNAPSHOT",
+    "artifacts" : [ {
+      "type" : "jar",
+      "sha1" : "b60314ba60fe610ee6b99479af8584c0d51273b7",
+      "md5" : "a7662afaa49a0bb79263c67bfc13f34c",
+      "name" : "maven-test-pkg-1.0.0-SNAPSHOT.jar"
+    }, {
+      "type" : "pom",
+      "sha1" : "353df16e720af2b8f096b0cbeb48f965288974b1",
+      "md5" : "84d4df52f2f1e7e2c74f6df5433438a5",
+      "name" : "maven-test-pkg-1.0.0-SNAPSHOT.pom"
+    } ]
+  } ],
+  "governance" : {
+    "blackDuckProperties" : {
+      "runChecks" : false,
+      "includePublishedArtifacts" : false,
+      "autoCreateMissingComponentRequests" : false,
+      "autoDiscardStaleComponentRequests" : false
+    }
+  }
+}
