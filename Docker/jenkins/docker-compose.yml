@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins
+    user: "${UID}:${GID}"
+    restart: always
+    ports:
+      - "8100:8080"
+    volumes:
+      - ./volumes/jenkins:/var/jenkins_home/
