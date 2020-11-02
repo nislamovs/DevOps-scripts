@@ -1,0 +1,58 @@
+version: '3.3'
+
+services:
+
+  influxdb:
+    image: influxdb:latest
+    hostname: influxdb
+    container_name: influxdb
+    user: "$UID:$GID"
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./volumes/influxdb:/var/lib/influxdb:rw
+      - ./volumes/influxdb/config:/etc/influxdb
+    environment:
+      - INFLUXDB_DB=telegraf
+      - INFLUXDB_ADMIN_USER=influx
+      - INFLUXDB_ADMIN_PASSWORD=influx
+    restart: always
+
+  telegraf:
+    image: telegraf:1.11-alpine
+    hostname: telegraf
+    container_name: telegraf
+    environment:
+      HOST_PROC: /rootfs/proc
+      HOST_SYS: /rootfs/sys
+      HOST_ETC: /rootfs/etc
+    links:
+      - influxdb
+    ports:
+      - "8125:8125/udp"
+    volumes:
+      - ./volumes/telegraf/config:/etc/telegraf
+      - ./config/telegraf/:/etc/telegraf/
+      - /sys:/rootfs/sys:ro
+      - /proc:/rootfs/proc:ro
+      - /etc:/rootfs/etc:ro
+    depends_on:
+      - influxdb
+    restart: always
+
+  grafana:
+    container_name: "grafana"
+    image: grafana/grafana:4.1.1
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./volumes/grafana-storage:/var/lib/grafana
+      - ./config/grafana/provisioning/:/etc/grafana/provisioning
+    environment:
+      GF_SERVER_ROOT_URL: http://localhost:3000
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: secret
+    links:
+      - influxdb
+    depends_on:
+      - influxdb
