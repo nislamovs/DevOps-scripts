@@ -1,0 +1,4 @@
+FROM rabbitmq:3.8.9-management
+
+ADD ./configs/rabbitmq.conf /etc/rabbitmq/
+ADD --chown=rabbitmq ./configs/definitions.json /etc/rabbitmq/

@@ -1,0 +1,19 @@
+# Export definitions :
+
+rabbitmqctl export_definitions definitions.json
+
+or
+
+rabbitmqadmin export definitions.json
+
+# Create delayed queue :
+
+rabbitmqadmin declare exchange name=bunny_delay type=x-delayed-message arguments='{"x-delayed-type": "direct"}'
+
+# Connect to docker
+
+docker exec -it rabbitmq /bin/bash
+
+#Prettify definitions,json
+
+cat ./definitions.json | jq . > ./definitions_prettified.json

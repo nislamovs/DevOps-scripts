@@ -1,0 +1,36 @@
+version: '3.5'
+
+services:
+
+  rabbitmq:
+    container_name: "rabbitmq"
+    hostname: localhost
+    user: root
+    build:
+      context: ./
+      dockerfile: Dockerfile_rabbitmq
+#    volumes:
+#      - "./volumes/etc/:/etc/rabbitmq/"
+#      - "./volumes/data/:/var/lib/rabbitmq/"
+#      - "./volumes/logs/:/var/log/rabbitmq/"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  rabbitmqsetup:
+    container_name: "rabbitmqsetup"
+    hostname: localhost
+    restart: on-failure
+    build:
+      context: ./
+      dockerfile: Dockerfile_rabbitmqSetup
+    depends_on:
+      - rabbitmq
+    links:
+      - rabbitmq
+    command: rabbitmqadmin -H rabbitmq -V / -P 15672 -u guest -p guest import /etc/rabbitmq/definitions.json
