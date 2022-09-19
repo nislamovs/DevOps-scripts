@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  ssh-example:
+    container_name: "ssh-example"
+    image: ubuntu:14.04
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - "22"
